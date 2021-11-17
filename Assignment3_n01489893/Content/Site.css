@@ -1,0 +1,42 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    color: #373f51;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+.navbar {
+    background-color: #a9bcd0;
+}
+
+.navbar a {
+    color: #373f51;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.navbar li a:hover {
+    background-color: #58a4b0;
+}
+
+.jumbotron {
+    background-color: rgba(218, 164, 154, 0.2);
+    box-shadow: rgba(0, 0, 0, 0.15) 2px 2px 2.5px;
+}
+
+.navbar-toggle .icon-bar {
+    background-color: #d8dbe2;
+}

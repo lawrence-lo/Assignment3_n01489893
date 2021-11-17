@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Assignment3_n01489893.Models.Teacher>
+@{
+    ViewBag.Title = "Search Result";
+}
+<h1>Search Result</h1>
+<a class="btn btn-default" role="button" href="/Teacher/List/">Back To List</a>
+<div id="containershow">
+    @if (Model.Count() == 0)
+    {
+        <div class="alert alert-danger" role="alert">Teacher Not Found.</div>
+    }
+    else
+    {
+        <div class="alert alert-success" role="alert">@Model.Count() Teacher(s) Found.</div>
+
+        foreach (var teacher in Model)
+        {
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">@teacher.TeacherFname @teacher.TeacherLname</h3>
+                </div>
+                <div class="panel-body">
+                    <p>Employee Number: @teacher.EmployeeNumber</p>
+                    <p>Hire Date: @teacher.TeacherHireDate.ToString("MMM dd, yyyy")</p>
+                    <p>Salary: $@teacher.TeacherSalary</p>
+                </div>
+            </div>
+        }
+    }
+</div>

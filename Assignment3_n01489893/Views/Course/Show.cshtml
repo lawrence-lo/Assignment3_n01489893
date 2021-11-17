@@ -1,0 +1,16 @@
+﻿@model Assignment3_n01489893.Models.Course
+@{
+    ViewBag.Title = "Course Details";
+}
+<h1>Course Details</h1>
+<a class="btn btn-default" role="button" href="/Course/List/">Back To List</a>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">@Model.CourseCode.ToUpper() - @Model.CourseName</h3>
+    </div>
+    <div class="panel-body">
+        <p>Start Date: @Model.CourseStartDate.ToString("MMM dd, yyyy")</p>
+        <p>Finish Date: @Model.CourseFinishDate.ToString("MMM dd, yyyy")</p>
+    </div>
+</div>

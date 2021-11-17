@@ -1,0 +1,24 @@
+﻿@model Tuple<Assignment3_n01489893.Models.Teacher, IEnumerable<Assignment3_n01489893.Models.Course>>
+@{
+    ViewBag.Title = "Teacher Details";
+}
+<h1>Teacher Details</h1>
+<a class="btn btn-default" role="button" href="/Teacher/List/">Back To List</a>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">@Model.Item1.TeacherFname @Model.Item1.TeacherLname</h3>
+    </div>
+    <div class="panel-body">
+        <p>Employee Number: @Model.Item1.EmployeeNumber</p>
+        <p>Hire Date: @Model.Item1.TeacherHireDate.ToString("MMM dd, yyyy")</p>
+        <p>Salary: $@Model.Item1.TeacherSalary</p>
+        <p>Course(s):</p>
+        <ul>
+            @foreach (var course in Model.Item2)
+            {
+                <li>@course.CourseCode.ToUpper() - @course.CourseName</li>
+            }
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+﻿@model IEnumerable<Assignment3_n01489893.Models.Course>
+@{
+    ViewBag.Title = "List of Courses";
+}
+
+<h1>List of Courses</h1>
+<div class="container">
+    <div class="list-group">
+        @foreach (var course in Model)
+        {
+        <a href="/Course/Show/@course.CourseId" class="list-group-item">@course.CourseCode.ToUpper() - @course.CourseName</a>
+        }
+    </div>
+</div>
