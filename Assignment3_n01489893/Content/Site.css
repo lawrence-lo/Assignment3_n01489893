@@ -40,3 +40,7 @@ textarea {
 .navbar-toggle .icon-bar {
     background-color: #d8dbe2;
 }
+
+.y-margin {
+    margin: 5px 0;
+}

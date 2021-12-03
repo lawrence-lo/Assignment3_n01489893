@@ -3,7 +3,10 @@
     ViewBag.Title = "Teacher Details";
 }
 <h1>Teacher Details</h1>
-<a class="btn btn-default" role="button" href="/Teacher/List/">Back To List</a>
+<nav class="y-margin">
+    <a class="btn btn-default" href="/Teacher/List/">Back To List</a>
+    <a class="btn btn-danger pull-right" href="/Teacher/DeleteConfirm/@Model.Item1.TeacherId">Delete</a>
+</nav>
 
 <div class="panel panel-default">
     <div class="panel-heading">

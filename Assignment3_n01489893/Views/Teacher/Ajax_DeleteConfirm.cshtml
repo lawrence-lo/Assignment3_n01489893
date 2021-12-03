@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Ajax_DeleteConfirm";
+}
+
+<div id="containershow">
+    <nav class="y-margin">
+        <a class="btn btn-default" href="/Teacher/Show/@Model.TeacherId">Cancel</a>
+    </nav>
+    <div class="text-center">
+        <h2>Are you sure you want to delete <span class="text-danger">@Model.TeacherFname @Model.TeacherLname</span>?</h2>
+        <p>This action cannot be undone.</p>
+        <form method="POST" action="/Teacher/Delete/@Model.TeacherId">
+            <button class="btn btn-danger" onclick="DeleteTeacher();">
+                Confirm Delete
+            </button>
+        </form>
+    </div>
+</div>

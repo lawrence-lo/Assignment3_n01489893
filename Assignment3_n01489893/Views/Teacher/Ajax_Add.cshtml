@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewBag.Title = "Ajax_Add";
+}
+
+<h1>New Teacher</h1>
+<nav class="y-margin">
+    <a class="btn btn-default" href="/Teacher/List">Back To Teachers</a>
+</nav>
+<div>
+    <form name="addTeacherForm" method="POST" action="/Teacher/Create" onsubmit="return AddTeacher()">
+        <div class="form-group">
+            <label for="TeacherFname">First Name:</label>
+            <input class="form-control" type="text" id="TeacherFname" name="TeacherFname" />
+        </div>
+        <div class="form-group">
+            <label for="TeacherLname">Last Name:</label>
+            <input class="form-control" type="text" id="TeacherLname" name="TeacherLname" />
+        </div>
+        <div class="form-group">
+            <label for="EmployeeNumber">Employee Number:</label>
+            <input class="form-control" type="text" id="EmployeeNumber" name="EmployeeNumber" />
+        </div>
+        <div class="form-group">
+            <label for="TeacherHireDate">Hire Date:</label>
+            <input class="form-control" type="date" id="TeacherHireDate" name="TeacherHireDate" />
+        </div>
+        <div class="form-group">
+            <label for="TeacherSalary">Salary:</label>
+            <input class="form-control" type="number" step=".01" id="TeacherSalary" name="TeacherSalary" />
+        </div>
+        <input class="btn btn-default" type="submit" value="Add Teacher" />
+    </form>
+</div>
