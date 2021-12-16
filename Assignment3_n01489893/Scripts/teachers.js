@@ -78,6 +78,59 @@ function DeleteTeacher() {
 	rq.send();
 };
 
+// AJAX for UpdateTeacher
+function UpdateTeacher(event) {
+
+	// Perform client side validation
+	validateForm();
+
+	// Make an AJAX call if fields are valid
+	if (validateForm() === true) {
+
+		//goal: send a request which looks like this:
+		//POST : http://localhost:51326/api/TeacherData/UpdateTeacher
+		//with POST data of TeacherFname, TeacherLname, EmployeeNumber etc.
+
+		//Get TeacherId from URL
+		var TeacherId = window.location.pathname.split("/").pop();
+
+		var URL = "http://localhost:51326/api/TeacherData/UpdateTeacher/" + TeacherId;
+
+		var rq = new XMLHttpRequest();
+
+		var TeacherFname = document.getElementById('TeacherFname').value;
+		var TeacherLname = document.getElementById('TeacherLname').value;
+		var EmployeeNumber = document.getElementById('EmployeeNumber').value;
+		var TeacherHireDate = document.getElementById('TeacherHireDate').value;
+		var TeacherSalary = document.getElementById('TeacherSalary').value;
+
+		var TeacherData = {
+			"TeacherFname": TeacherFname,
+			"TeacherLname": TeacherLname,
+			"EmployeeNumber": EmployeeNumber,
+			"TeacherHireDate": TeacherHireDate,
+			"TeacherSalary": TeacherSalary
+		};
+
+		rq.open("POST", URL, true);
+		rq.setRequestHeader("Content-Type", "application/json");
+		rq.onreadystatechange = function () {
+			//ready state should be 4 AND status should be 200
+			if (rq.readyState == 4 && rq.status == 200) {
+				//request is successful and the request is finished
+
+				//nothing to render, the method returns nothing.
+			}
+		}
+
+		//POST information sent through the .send() method
+		rq.send(JSON.stringify(TeacherData));
+
+	} else {
+		return false;
+	};
+};
+
 // This function will change the backgorund color and set the field on focus if value is missing
 // Returns false if any value is missing
 function validateForm() {

@@ -82,8 +82,8 @@ namespace Assignment3_n01489893.Controllers
 
         }
 
-        //GET : /Teacher/AddError
-        public ActionResult AddError()
+        //GET : /Teacher/Error
+        public ActionResult Error()
         {
             return View();
         }
@@ -121,8 +121,8 @@ namespace Assignment3_n01489893.Controllers
 
             if (errors.Count > 0)
             {
-                // Route to AddError page if any of the input is invalid
-                return View("AddError", errors);
+                // Route to Error page if any of the input is invalid
+                return View("Error", errors);
                 // Note: I would like it to redirect to the form with user's previous input pre-populated but I couldn't figure it out.
             }
             else
@@ -138,6 +138,98 @@ namespace Assignment3_n01489893.Controllers
                 controller.AddTeacher(NewTeacher);
 
                 return RedirectToAction("List");
+            }
+        }
+
+        /// <summary>
+        /// Routes to a dynamically generated "Teacher Update" Page. Gathers information from the database.
+        /// </summary>
+        /// <param name="id">Id of the Teacher</param>
+        /// <returns>A dynamic "Update Teacher" webpage which provides the current information of the teacher and asks the user for new information as part of a form.</returns>
+        /// <example>GET : /Teacher/Update/1</example>
+        public ActionResult Update(int id)
+        {
+            TeacherDataController controller = new TeacherDataController();
+            Teacher SelectedTeacher = controller.FindTeacher(id);
+
+            return View(SelectedTeacher);
+        }
+
+        //GET : /Teacher/Ajax_Update/{id}
+        public ActionResult Ajax_Update(int id)
+        {
+            TeacherDataController controller = new TeacherDataController();
+            Teacher SelectedTeacher = controller.FindTeacher(id);
+
+            return View(SelectedTeacher);
+        }
+
+        /// <summary>
+        /// Receives a POST request containing information about an existing teacher in the system, with new values. Conveys this information to the API, and redirects to the "Teacher Show" page of our updated teacher.
+        /// </summary>
+        /// <param name="id">Id of the Teacher to update</param>
+        /// <param name="TeacherFname">The updated first name of the teacher</param>
+        /// <param name="TeacherLname">The updated last name of the teacher</param>
+        /// <param name="EmployeeNumber">The updated employee number of the teacher.</param>
+        /// <param name="TeacherHireDate">The updated hire date of the teacher.</param>
+        /// <param name="TeacherSalary">The updated salary of the teacher.</param>
+        /// <returns>A dynamic webpage which provides the current information of the teacher.</returns>
+        /// <example>
+        /// POST : /Teacher/Update/1
+        /// FORM DATA / POST DATA / REQUEST BODY 
+        /// {
+        ///	"TeacherFname":"Alexander",
+        ///	"TeacherLname":"Bennett",
+        ///	"EmployeeNumber":"T378",
+        ///	"TeacherHireDate":"12/02/21 12:00:00 AM",
+        ///	"TeacherSalary":"55.30"
+        /// }
+        /// </example>
+        [HttpPost]
+        public ActionResult Update(int id, string TeacherFname, string TeacherLname, string EmployeeNumber, DateTime TeacherHireDate, Decimal TeacherSalary = 0)
+        {
+            List<string> errors = new List<string>();
+
+            // Server side validation
+            // Validate TeacherFname
+            if (string.IsNullOrEmpty(TeacherFname))
+            {
+                errors.Add("First Name is mssing.");
+            }
+            // Validate TeacherLname
+            if (string.IsNullOrEmpty(TeacherLname))
+            {
+                errors.Add("Last Name is mssing.");
+            }
+            // Validate EmployeeNumber
+            if (string.IsNullOrEmpty(EmployeeNumber))
+            {
+                errors.Add("Employee Number is mssing.");
+            }
+            //Validate TeacherSalary
+            if (TeacherSalary == 0)
+            {
+                errors.Add("Salary is mssing.");
+            }
+
+            if (errors.Count > 0)
+            {
+                // Route to Error page if any of the input is invalid
+                return View("Error", errors);
+            }
+            else
+            {
+                Teacher TeacherInfo = new Teacher();
+                TeacherInfo.TeacherFname = TeacherFname;
+                TeacherInfo.TeacherLname = TeacherLname;
+                TeacherInfo.EmployeeNumber = EmployeeNumber;
+                TeacherInfo.TeacherHireDate = TeacherHireDate;
+                TeacherInfo.TeacherSalary = TeacherSalary;
+
+                TeacherDataController controller = new TeacherDataController();
+                controller.UpdateTeacher(id, TeacherInfo);
+
+                return RedirectToAction("Show/" + id);
             }
         }
     }
